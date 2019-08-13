@@ -5,48 +5,67 @@ class Canvas extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        };
+        }
 
         //Creating a ref to the DOM node through our class constructor. This allows us to attach a ref on the div in the dom with the matching ref.
         this.canvasRef = React.createRef()
+        this.resizeCanvas = this.resizeCanvas.bind(this);
     }
 
 
     componentDidMount() {
+        //Making an event listener for the window so we can cause the canvas to be the same size as the viewport
+        this.resizeCanvas();
+        window.addEventListener('resize', this.resizeCanvas, false);
+        this.drawStuff(90);
+    }
+
+    componentDidUpdate(){
+        this.drawStuff(this.props.radius);
+    }
+
+
+
+    resizeCanvas = () => {
         //Making a variable for the canvas
         const canvas = this.canvasRef.current;
+
         //This is the "context" with which we are making our shapes through
         const ctx = canvas.getContext('2d');
 
-        //Making an event listener for the window so we can cause the canvas to be the same size as the viewport
-        window.addEventListener('resize', resizeCanvas, false);
+        //setting the canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        //Drawing needs to be in side of resizeCanvas else when the window is resized everything will reset
+        this.drawStuff();
+    }
 
 
-        function resizeCanvas() {
-            //setting the canvas size
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+    drawStuff = (radius) => {
+        //Making a variable for the canvas
+        const canvas = this.canvasRef.current;
 
-            //Drawing needs to be in side of resizeCanvas else when the window is resized everything will reset
-            drawStuff();
-        }
-        resizeCanvas();
+        //This is the "context" with which we are making our shapes through
+        const ctx = canvas.getContext('2d');
 
+        let arcHeight = window.innerHeight / 2;
+        let arcWidth = window.innerWidth / 2;
+        let height = window.innerHeight;
+        let width = window.innerWidth;
 
-        function drawStuff() {
-            const { radius } = this.props;
-            let arcHeight = window.innerHeight / 2;
-            let arcWidth = window.innerWidth / 2;
-
+            ctx.save();
             ctx.beginPath();
-            ctx.arc(arcWidth, arcHeight, 200, 0, 2 * Math.PI, false);
+            ctx.clearRect(0, 0, width, height);
+            ctx.arc(arcWidth, arcHeight, radius, 0, 2 * Math.PI, false);
             ctx.fillStyle = 'black';
             ctx.fill();
+            ctx.restore();
 
-            // ctx.clearRect(0, 0,  window.innerWidth, window.innerHeight);
 
-        }
     }
+
+
 
 
 
@@ -54,8 +73,7 @@ class Canvas extends React.Component {
 
 
     render() {
-
-        return <canvas ref={this.canvasRef}></canvas>;
+        return  <canvas ref={this.canvasRef}/>
     }
 };
 
