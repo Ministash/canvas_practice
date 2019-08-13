@@ -12,9 +12,10 @@ class Animation extends React.Component {
     }
 
     updateAnimationState() {
-        console.log("hello");
-        if (this.state.radius < 1500) {
-            this.setState(prevState => ({ radius: prevState.radius + 10 }));
+        let num = window.innerHeight * 1.5;
+        console.log(num);
+        if (this.state.radius < num) {
+            this.setState(prevState => ({ radius: prevState.radius + 20 }));
             this.rAF = requestAnimationFrame(this.updateAnimationState);
             console.log(this.state.radius);
         }

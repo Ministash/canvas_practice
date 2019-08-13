@@ -5,6 +5,7 @@ class Canvas extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            newRadius: this.props.radius
         }
 
         //Creating a ref to the DOM node through our class constructor. This allows us to attach a ref on the div in the dom with the matching ref.
@@ -38,7 +39,7 @@ class Canvas extends React.Component {
         canvas.height = window.innerHeight;
 
         //Drawing needs to be in side of resizeCanvas else when the window is resized everything will reset
-        this.drawStuff();
+        this.drawStuff(this.state.newRadius);
     }
 
 
