@@ -31,9 +31,6 @@ class Canvas extends React.Component {
         //Making a variable for the canvas
         const canvas = this.canvasRef.current;
 
-        //This is the "context" with which we are making our shapes through
-        const ctx = canvas.getContext('2d');
-
         //setting the canvas size
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;

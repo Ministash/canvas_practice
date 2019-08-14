@@ -1,6 +1,5 @@
 import React from "react";
 import Canvas from "../canvas/index";
-import { red } from "ansi-colors";
 
 class Animation extends React.Component {
     constructor(props) {

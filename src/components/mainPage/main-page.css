@@ -1,0 +1,7 @@
+.window-div{
+    margin: 0 auto;
+    margin-top: 25vh;
+    width: 500px;
+    height: 500px;
+    z-index: 0;
+}

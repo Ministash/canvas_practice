@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Animation from './components/animations/index';
+import MainPage from './components/mainPage/index';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div>
         <Router>
-          <Route exact path="/" render={() => <Animation />} />
+          <Route exact path="/" render={() => <MainPage />} />
         </Router>
       </div>
     );
